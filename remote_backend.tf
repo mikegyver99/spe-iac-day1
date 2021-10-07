@@ -1,9 +1,9 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "YOUR-TFCP-ORGANIZATION"
+    organization = "michael_garcia_spesonycom"
     workspaces {
-      name = "UNIQUE-WORKSPACE-NAME"
+      name = "tfc-s3-priv-module-lab-mgarcia16-day2"
     }
   }
 }

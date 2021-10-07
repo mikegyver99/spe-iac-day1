@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "s3-bucket" {
-  source  = "<YOUR-S3-PMR-MODULE>"
+  source  = "app.terraform.io/michael_garcia_spesonycom/s3-bucket/aws"
   version = "2.9.0"
 
   bucket        = "${var.prefix}-${var.bucket_name}"
