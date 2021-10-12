@@ -1,6 +1,6 @@
 resource "aws_instance" "tfc-mgarcia16-ec2" {
   instance_type     = "t3.nano"
-  ami               = "ami-06114735d23400102" #AWS Linux
+  ami               = "ami-0c2d06d50ce30b442" #AWS Linux
   availability_zone = "us-west-2c"
   tags = {
     Name        = "tfc-mgarcia16-ec2"
