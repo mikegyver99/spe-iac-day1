@@ -15,6 +15,7 @@ data "aws_ami" "ubuntu" {
     Name        = "tfc-mgarcia16-ec2"
     Environment = "Sandbox"
   }
+  }
 
   root_block_device {
     volume_size           = "40"
