@@ -120,10 +120,6 @@ resource "null_resource" "configure-cat-app" {
 resource "tls_private_key" "hashicat" {
   algorithm = "RSA"
 
-  tags = {
-    Name        = "${var.prefix}-rsakey"
-    Environment = "Sandbox"
-  }
 }
 
 locals {
