@@ -53,7 +53,7 @@ resource "aws_instance" "hashicat" {
   vpc_security_group_ids      = [aws_security_group.hashicat.id]
 
   tags = {
-    Name = "${var.prefix}-hashicat-instance"
+    Name        = "${var.prefix}-hashicat-instance"
     Environment = "Sandbox"
   }
 }
@@ -75,12 +75,7 @@ resource "null_resource" "configure-cat-app" {
 
   triggers = {
     build_number = timestamp()
-
-  tags = {
-    Name        = "${var.prefix}-null"
-    Environment = "Sandbox"
   }
-
 
   provisioner "file" {
     source      = "files/"
@@ -93,7 +88,6 @@ resource "null_resource" "configure-cat-app" {
       host        = aws_eip.hashicat.public_ip
     }
   }
-}
 
   provisioner "remote-exec" {
     inline = [
