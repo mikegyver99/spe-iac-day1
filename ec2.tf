@@ -38,10 +38,6 @@ resource "aws_eip_association" "hashicat" {
   instance_id   = aws_instance.hashicat.id
   allocation_id = aws_eip.hashicat.id
 
-  tags = {
-    Name        = "${var.prefix}-eip-assoc"
-    Environment = "Sandbox"
-  }
 }
 
 resource "aws_instance" "hashicat" {
