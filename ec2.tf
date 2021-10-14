@@ -20,7 +20,7 @@ resource "aws_instance" "tfc-mgarcia16-ec2" {
   ami               = data.aws_ami.ubuntu.id
   availability_zone = "us-west-2c"
   tags = {
-    Name        = "tfc-mgarcia16-ec2"
+    Name        = "${var.prefix}-ec2"
     Environment = "Sandbox"
   }
 }
@@ -28,11 +28,20 @@ resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
   vpc      = true
 }
+  tags = {
+    Name        = "${var.prefix}-eip"
+    Environment = "Sandbox"
+  }
 
 resource "aws_eip_association" "hashicat" {
   instance_id   = aws_instance.hashicat.id
   allocation_id = aws_eip.hashicat.id
 }
+
+  tags = {
+    Name        = "${var.prefix}-eip-assoc"
+    Environment = "Sandbox"
+  }
 
 resource "aws_instance" "hashicat" {
   ami                         = data.aws_ami.ubuntu.id
@@ -44,6 +53,7 @@ resource "aws_instance" "hashicat" {
 
   tags = {
     Name = "${var.prefix}-hashicat-instance"
+    Environment = "Sandbox"
   }
 }
 
@@ -65,6 +75,12 @@ resource "null_resource" "configure-cat-app" {
   triggers = {
     build_number = timestamp()
   }
+
+  tags = {
+    Name        = "${var.prefix}-null"
+    Environment = "Sandbox"
+  }
+
 
   provisioner "file" {
     source      = "files/"
@@ -105,6 +121,12 @@ resource "tls_private_key" "hashicat" {
   algorithm = "RSA"
 }
 
+  tags = {
+    Name        = "${var.prefix}-rsakey"
+    Environment = "Sandbox"
+  }
+
+
 locals {
   private_key_filename = "${var.prefix}-ssh-key.pem"
 }
@@ -113,3 +135,9 @@ resource "aws_key_pair" "hashicat" {
   key_name   = local.private_key_filename
   public_key = tls_private_key.hashicat.public_key_openssh
 }
+
+  tags = {
+    Name        = "${var.prefix}-rsakeypair"
+    Environment = "Sandbox"
+  }
+
