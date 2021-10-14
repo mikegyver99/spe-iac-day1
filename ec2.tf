@@ -69,11 +69,6 @@ resource "aws_instance" "hashicat" {
 resource "null_resource" "configure-cat-app" {
   depends_on = [aws_eip_association.hashicat]
 
-  tags = {
-    Name        = "${var.prefix}-ec2"
-    Environment = "Sandbox"
-  }
-
   triggers = {
     build_number = timestamp()
   }
